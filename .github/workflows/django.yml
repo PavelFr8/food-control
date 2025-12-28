@@ -56,5 +56,5 @@ jobs:
 
       - name: Run Django tests
         run: |
-          cd text_races
+          cd food_control
           python manage.py test

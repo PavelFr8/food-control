@@ -15,6 +15,27 @@
 
 ---
 
+## Туториал по запуску приложения в prod-режиме
+
+### Требования
+
+- Установленный Docker и Docker Compose
+
+### Клонирование репозитория
+
+```bash
+git clone https://github.com/PavelFr8/food-control
+cd food-control
+```
+
+### Сборка и запуск веб-приложения
+
+```bash
+docker compose up -d --build
+```
+
+---
+
 ## Туториал по запуску приложения в dev-режиме
 
 ### Клонирование репозитория
@@ -78,6 +99,8 @@ python3 manage.py migrate
 ```
 
 По желанию вы можете добавить в БД тестовые данные от разработчика:
+
+!НА ДАННЫЙ МОМЕНТ FIXTURE ОТСУТСВУЕТ!
 
 ```bash
 python3 manage.py loaddata fixtures/data.json

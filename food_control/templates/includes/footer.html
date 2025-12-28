@@ -1,0 +1,11 @@
+{% load static %}
+{% load i18n %}
+<footer class="py-4 bg-dark text-light">
+  <div class="container text-center">
+    <p class="mb-0">
+      (C) <span id="year" data-time="{% now 'c' %}">{% now "Y" %}</span> {% translate "Супер-дупер крутой сайт. Все права защищены танковой броней 5-го поколения." %}
+    </p>
+  </div>
+</footer>
+
+<script src="{% static 'js/updateYear.js' %}"></script>

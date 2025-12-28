@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Мой профиль" %}{% endblock %}
+{% block content %}
+  <h1 class="mt-3">
+    {% translate "Мой профиль" %}
+  </h1>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+      {% with form=forms.user_form %}
+        {% include "includes/form.html" %}
+      {% endwith %}
+      {% with form=forms.profile_form %}
+        {% include "includes/form.html" %}
+      {% endwith %}
+    <br>
+    <button type="submit" class="btn btn-primary">{% translate "Сохранить изменения" %}</button>
+  </form>
+  <form action="{% url 'users:logout' %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning mt-3">{% trans "Выйти" %}</button>
+  </form>
+  <a href="{% url 'users:password_change' %}" class="btn btn-success mt-3">{% translate "Сменить пароль" %}</a>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% block title %}{% translate "Информация о пользователе" %}{% endblock %}
+{% block content %}
+	<div class="container mt-4">
+		<div class="text-center">
+			{% if user.profile.image %}
+				<img src="{{ user.profile.get_image.url }}" alt="Профиль" class="rounded-circle mb-3">
+			{% else %}
+				<img src="{% static 'img/racoon.jpg' %}" alt="image" class="rounded-circle mb-3 racoon">
+			{% endif %}
+			{% if user.first_name and user.last_name %}
+				<h2 class="mb-3">{{ user.get_full_name }}</h2>
+			{% else %}
+				<h2 class="mb-3">{% translate "Имя не указано" %}</h2>
+			{% endif %}
+
+			<p class="text-muted">{{ user.email }}</p>
+
+			{% if user.profile.birthday %}
+				<p>{% translate "Дата рождения: " %}<strong>{{ user.profile.birthday|date:"d.m" }}</strong></p>
+			{% else %}
+				<p>{% translate "Дата рождения не указана" %}</p>
+			{% endif %}
+			<p>{% translate "Количество выпитого кофе" %}: <strong>{{ user.profile.coffee_count }}</strong></p>
+      <a class="btn btn-info" href="{% url 'statistics:user' user.id %}">
+        {% translate "Просмотреть статистику" %}
+      </a>
+		</div>
+	</div>
+{% endblock %}

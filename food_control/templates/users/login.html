@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{% translate "Вход" %}{% endblock  %}
+
+{% block content %}
+  <h2 class="mt-4 mb-4">{% translate "Войти в аккаунт" %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% include "includes/form.html" %}
+    <br>
+    <input class="btn btn-primary" type="submit" value="{% translate 'Подтвердить' %}">
+  </form>
+  <br>
+  <a href="{% url 'users:signup' %}" class="m-2">{% translate "Зарегистрироваться" %}</a>
+  <a href={% url "users:password_reset" %}>{% translate "Забыли пароль?" %}</a>
+{% endblock  %}

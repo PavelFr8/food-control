@@ -1,0 +1,24 @@
+{% load static %}
+{% load i18n %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+<a href="{% url 'users:user_detail' user.id %}" class="text-decoration-none text-dark">
+	<li class="list-group-item d-flex align-items-center">
+		{% if user.profile.image %}
+			<img src="{{ user.profile.get_image.url }}" alt="Профиль" class="rounded-circle me-3">
+		{% else %}
+			<img src="{% static 'img/racoon.jpg' %}" alt="image" class="rounded-circle me-3 racoon">
+		{% endif %}
+		<div>
+			{% if user.first_name %}
+				<h2><strong>{{ user.first_name }}</strong></h2>
+			{% else %}
+				<h2><strong>{% translate "Имя не указано" %}</strong></h2>
+			{% endif %}
+			{% if user.profile.birthday %}
+				<span class="text-muted d-block">{% translate "Дата рождения" %}: {{ user.profile.birthday|date:"d.m" }}</span>
+			{% else %}
+				<span class="text-muted d-block">{% translate "Дата рождения" %}: {% translate "Не указано" %}</span>
+			{% endif %}
+		</div>
+	</li>
+</a>

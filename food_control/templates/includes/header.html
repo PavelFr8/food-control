@@ -1,0 +1,56 @@
+{% load static %}
+{% load i18n %}
+{% with request.resolver_match.view_name as view_name %}
+<header class="navbar navbar-expand-lg navbar-light bg-light shadow">
+  <div class="container">
+    {% if view_name != 'homepage:main' %}
+      <a class="navbar-brand" href="{% url 'homepage:main' %}">
+        <img src="{% static 'img/logo.png' %}" height="40" alt="logo">
+      </a>
+    {% else %}
+    <span class="navbar-brand">
+      <img src="{% static 'img/logo.png' %}" height="40" alt="logo">
+    </span>
+    {% endif %}
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link {% if view_name == 'users:profile' %}disabled{% endif %}" href="{% url 'users:profile' %}">
+            {% translate "Мой профиль" %}
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link {% if view_name == 'users:login' %}disabled{% endif %}" href="{% url 'users:login' %}">
+            {% translate "Войти" %}
+          </a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link {% if view_name == 'homepage:main' %}disabled{% endif %}" href="{% url 'homepage:main' %}">
+            {% translate "Главная" %}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if view_name == 'users:user_list' %}disabled{% endif %}" href="{% url 'users:user_list' %}">
+            {% translate "Пользователи" %}
+          </a>
+        </li>
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin:index' %}">
+            Django-Admin
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</header>
+{% endwith %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate "Регистрация" %}{% endblock  %}
+
+{% block content %}
+  <h2 class="mt-4 mb-4">{% translate "Регистрация" %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% include "includes/form.html" %}
+    <br>
+    <input class="btn btn-primary" type="submit" value="{% translate 'Подтвердить' %}">
+  </form>
+  <br>
+{% endblock  %}

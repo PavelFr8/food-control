@@ -22,10 +22,6 @@
 			{% else %}
 				<p>{% translate "Дата рождения не указана" %}</p>
 			{% endif %}
-			<p>{% translate "Количество выпитого кофе" %}: <strong>{{ user.profile.coffee_count }}</strong></p>
-      <a class="btn btn-info" href="{% url 'statistics:user' user.id %}">
-        {% translate "Просмотреть статистику" %}
-      </a>
 		</div>
 	</div>
 {% endblock %}

@@ -47,6 +47,15 @@ else:
         default=False,
         cast=bool,
     )
+    CSRF_TRUSTED_ORIGINS = get_env(
+        "CSRF_TRUSTED_ORIGINS",
+        default=[
+            "http://127.0.0.1:8080",
+            "http://localhost:8080",
+            "http://nginx:80",
+        ],
+        cast=list,
+    )
 
 MAX_AUTH_ATTEMPTS = get_env(
     "DJANGO_MAX_AUTH_ATTEMPTS",
@@ -55,6 +64,7 @@ MAX_AUTH_ATTEMPTS = get_env(
 )
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -104,14 +114,32 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "food_control.wsgi.application"
 
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    },
-}
-
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        },
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": get_env(
+                "POSTGRES_DB",
+                default="food_control_db",
+                cast=str,
+            ),
+            "USER": get_env("POSTGRES_USER", default="admin", cast=str),
+            "PASSWORD": get_env(
+                "POSTGRES_PASSWORD",
+                default="password",
+                cast=str,
+            ),
+            "HOST": get_env("POSTGRES_HOST", default="db", cast=str),
+            "PORT": get_env("POSTGRES_PORT", default=5432, cast=int),
+        },
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -166,8 +194,43 @@ LOGIN_URL = "/users/login/"
 LOGIN_REDIRECT_URL = "/users/profile/"
 LOGOUT_REDIRECT_URL = "/users/login"
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "send_mail"
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = BASE_DIR / "send_mail"
+
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+    EMAIL_HOST = get_env(
+        "DJANGO_EMAIL_HOST",
+        default="smtp.yandex.ru",
+        cast=str,
+    )
+    EMAIL_PORT = get_env(
+        "DJANGO_EMAIL_PORT",
+        default=465,
+        cast=int,
+    )
+    EMAIL_USE_SSL = get_env(
+        "DJANGO_EMAIL_USE_SSL",
+        default=True,
+        cast=bool,
+    )
+    EMAIL_HOST_USER = get_env(
+        "DJANGO_EMAIL_HOST_USER",
+        default="",
+        cast=str,
+    )
+    EMAIL_HOST_PASSWORD = get_env(
+        "DJANGO_EMAIL_HOST_PASSWORD",
+        default="",
+        cast=str,
+    )
+    DEFAULT_FROM_EMAIL = get_env(
+        "DJANGO_DEFAULT_FROM_EMAIL",
+        default=EMAIL_HOST_USER,
+        cast=str,
+    )
 
 AUTHENTICATION_BACKENDS = [
     "users.backends.AuthUserBackend",

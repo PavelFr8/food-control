@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import django.urls
 from food_control.utils import get_env
 
 
@@ -71,10 +72,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "widget_tweaks",
     "sorl.thumbnail",
     "tinymce",
     "core.apps.CoreConfig",
-    "homepage.apps.HomepageConfig",
     "users.apps.UsersConfig",
     "django_cleanup.apps.CleanupConfig",
 ]
@@ -190,9 +191,11 @@ MEDIA_URL = "/media/"
 
 # Auth setup
 
-LOGIN_URL = "/users/login/"
-LOGIN_REDIRECT_URL = "/users/profile/"
-LOGOUT_REDIRECT_URL = "/users/login"
+AUTH_USER_MODEL = "users.User"
+
+LOGIN_URL = django.urls.reverse_lazy("users:login")
+LOGIN_REDIRECT_URL = django.urls.reverse_lazy("users:profile")
+LOGOUT_REDIRECT_URL = LOGIN_URL
 
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"

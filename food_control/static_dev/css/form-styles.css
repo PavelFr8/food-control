@@ -1,0 +1,26 @@
+.form-label {
+    font-size: 1.2rem;
+    color: #000;
+    margin-bottom: 0.5rem;
+}
+
+.agree-btn {
+    font-size: 1.3rem;
+    font-weight: 600;
+    border: none;
+}
+
+.form-card {
+    min-height: 80vh;
+}
+
+.form-head {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #000 !important;
+}
+
+.form-control:focus {
+    border-color: #1b8112;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(2, 109, 52, 0.6);
+}

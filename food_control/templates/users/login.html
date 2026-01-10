@@ -1,17 +1,26 @@
 {% extends "base.html" %}
-{% load i18n %}
 {% load static %}
-{% block title %}{% translate "Вход" %}{% endblock  %}
+
+{% block title %}Вход{% endblock %}
 
 {% block content %}
-  <h2 class="mt-4 mb-4">{% translate "Войти в аккаунт" %}</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% include "includes/form.html" %}
-    <br>
-    <input class="btn btn-primary" type="submit" value="{% translate 'Подтвердить' %}">
-  </form>
-  <br>
-  <a href="{% url 'users:signup' %}" class="m-2">{% translate "Зарегистрироваться" %}</a>
-  <a href={% url "users:password_reset" %}>{% translate "Забыли пароль?" %}</a>
-{% endblock  %}
+<div class="container d-flex justify-content-center align-items-center form-card">
+  <div class="col-md-6 col-lg-5">
+    <h2 class="text-center mb-4 text-primary-emphasis form-head">Вход</h2>
+    <form method="post" class="bg-white p-4 shadow rounded-4">
+      {% csrf_token %}
+      {% include "includes/form.html" %}
+      <div class="d-grid gap-2 mt-4">
+        <button class="btn btn-success btn-lg agree-btn" type="submit">Подтвердить</button>
+      </div>
+      <div class="text-center mt-3">
+        <a href="{% url 'users:signup' %}" class="link-success fw-semibold">Зарегистрироваться</a>
+        <span class="mx-2"></span>
+        <a href="{% url 'users:password_reset' %}" class="link-success fw-semibold">Забыли пароль?</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+

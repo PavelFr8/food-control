@@ -5,12 +5,10 @@ import django.contrib.auth.urls
 import django.contrib.staticfiles.urls
 import django.urls
 
-import homepage.urls
 import users.urls
 
 
 urlpatterns = [
-    django.urls.path("", django.urls.include(homepage.urls)),
     django.urls.path("admin/", django.contrib.admin.site.urls),
     django.urls.path("users/", django.urls.include(users.urls)),
     django.urls.path("users/", django.urls.include(django.contrib.auth.urls)),

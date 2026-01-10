@@ -1,6 +1,7 @@
 import datetime
 
 import django.core.exceptions
+import django.core.validators
 import django.utils.timezone
 
 
@@ -18,3 +19,9 @@ def validate_not_future(value):
             raise django.core.exceptions.ValidationError(
                 "Ого! Вы что из прошлого?",
             )
+
+
+fio_validator = django.core.validators.RegexValidator(
+    regex=r"^[а-яА-ЯёЁa-zA-Z\s-]+$",
+    message="ФИО может содержать только буквы, пробелы и дефисы",
+)

@@ -1,27 +1,104 @@
 {% extends "base.html" %}
-{% load i18n static %}
-{% block title %}{% translate "Информация о пользователе" %}{% endblock %}
+
+{% block title %}Мой профиль{% endblock %}
+
 {% block content %}
-	<div class="container mt-4">
-		<div class="text-center">
-			{% if user.profile.image %}
-				<img src="{{ user.profile.get_image.url }}" alt="Профиль" class="rounded-circle mb-3">
-			{% else %}
-				<img src="{% static 'img/racoon.jpg' %}" alt="image" class="rounded-circle mb-3 racoon">
-			{% endif %}
-			{% if user.first_name and user.last_name %}
-				<h2 class="mb-3">{{ user.get_full_name }}</h2>
-			{% else %}
-				<h2 class="mb-3">{% translate "Имя не указано" %}</h2>
-			{% endif %}
+<div class="container py-5">
+  <div class="row justify-content-center">
 
-			<p class="text-muted">{{ user.email }}</p>
+    <div class="col-lg-8">
 
-			{% if user.profile.birthday %}
-				<p>{% translate "Дата рождения: " %}<strong>{{ user.profile.birthday|date:"d.m" }}</strong></p>
-			{% else %}
-				<p>{% translate "Дата рождения не указана" %}</p>
-			{% endif %}
-		</div>
-	</div>
+      <h2 class="text-center mb-4">
+        Мой профиль
+      </h2>
+
+      <div class="card shadow-sm rounded-4 mb-4">
+        <div class="card-body p-4">
+
+          <div class="d-flex align-items-center mb-4">
+            <div class="rounded-circle bg-secondary-subtle d-flex align-items-center justify-content-center me-3"
+                 style="width: 64px; height: 64px; font-size: 28px;">
+              👤
+            </div>
+
+            <div>
+              <h5 class="mb-1">
+                {{ user.last_name }} {{ user.first_name }}
+                {% if user.patronymic %}
+                  {{ user.patronymic }}
+                {% endif %}
+              </h5>
+
+              <div class="text-muted small">
+                {{ user.email }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+
+            <div class="col-md-6">
+              <div class="text-muted small">Дата регистрации</div>
+              <div>{{ user.date_joined|date:"d.m.Y" }}</div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="text-muted small">Класс</div>
+              <div>
+                {% if user.school_class %}
+                  {{ user.get_school_class_display }}
+                {% else %}
+                  <span class="text-muted">—</span>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="text-muted small"Дата рождения</div>
+              <div>
+                {% if user.birthday %}
+                  {{ user.birthday|date:"d.m.Y" }}
+                {% else %}
+                  <span class="text-muted">—</span>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="text-muted small">Пищевые предпочтения</div>
+              <div>
+                {% if user.food_features.exists %}
+                  {% for feature in user.food_features.all %}
+                    <span class="badge bg-success-subtle text-success-emphasis me-1">
+                      {{ feature }}
+                    </span>
+                  {% endfor %}
+                {% else %}
+                  <span class="text-muted">—</span>
+                {% endif %}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm rounded-4">
+        <div class="card-body p-4">
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+
+            <a href=""
+               class="btn btn-outline-success">
+              Уга буга
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

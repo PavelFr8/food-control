@@ -1,8 +1,33 @@
+import django.contrib.auth.mixins
 import django.core.exceptions
 import django.forms
 
 from core.forms import BootstrapFormMixin
-from users.models import Profile, User
+import users.models
+
+
+class RoleRequiredMixin(django.contrib.auth.mixins.LoginRequiredMixin):
+    required_roles = [users.models.Role.RoleNames.STUDENT]
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+
+        allow_access = False
+        for role in self.required_roles:
+            if role is None or role not in users.models.Role.RoleNames:
+                raise RuntimeError(
+                    f"{self.__class__.__name__} requires `required_role`",
+                )
+
+            if request.user.role.name == role:
+                allow_access = True
+                break
+
+        if not allow_access:
+            raise django.core.exceptions.PermissionDenied
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class SignUpForm(
@@ -10,58 +35,42 @@ class SignUpForm(
     django.contrib.auth.forms.UserCreationForm,
 ):
     class Meta(django.contrib.auth.forms.UserCreationForm.Meta):
-        model = User
+        model = users.models.User
         fields = (
-            User.email.field.name,
-            User.username.field.name,
+            users.models.User.email.field.name,
+            users.models.User.last_name.field.name,
+            users.models.User.first_name.field.name,
+            users.models.User.patronymic.field.name,
+            users.models.User.birthday.field.name,
+            users.models.User.school_class.field.name,
         )
-
-    def clean_username(self):
-        username = self.cleaned_data.get("username")
-
-        if "@" in username:
-            raise django.core.exceptions.ValidationError(
-                "Имя пользователя не может содержать символ '@'",
-            )
-
-        return username
+        widgets = {
+            users.models.User.birthday.field.name: django.forms.DateInput(
+                attrs={"type": "date"},
+            ),
+        }
 
 
-class UserChangeForm(
-    BootstrapFormMixin,
-    django.contrib.auth.forms.UserChangeForm,
-):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields.pop("password")
-
-    class Meta(django.contrib.auth.forms.UserChangeForm.Meta):
-        model = User
-        fields = (
-            User.first_name.field.name,
-            User.last_name.field.name,
-        )
-
-
-class ProfileForm(
+class UserForm(
     BootstrapFormMixin,
     django.forms.ModelForm,
 ):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields[Profile.birthday.field.name].widget = (
-            django.forms.DateInput(
-                attrs={"type": "date", "class": "form-control"},
-            )
-        )
-
     class Meta:
-        model = Profile
+        model = users.models.User
         fields = (
-            Profile.image.field.name,
-            Profile.birthday.field.name,
+            users.models.User.email.field.name,
+            users.models.User.last_name.field.name,
+            users.models.User.first_name.field.name,
+            users.models.User.patronymic.field.name,
+            users.models.User.birthday.field.name,
+            users.models.User.school_class.field.name,
+            users.models.User.food_features.field.name,
         )
-        help_text = {
-            Profile.image.field.name: "Введите имя",
-            Profile.birthday.field.name: "Введите дату дня рождения",
+        widgets = {
+            users.models.User.birthday.field.name: django.forms.DateInput(
+                attrs={"type": "date"},
+            ),
+        }
+        help_texts = {
+            users.models.User.birthday.field.name: "Введите дату рождения",
         }

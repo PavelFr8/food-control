@@ -1,55 +1,68 @@
 {% load static %}
-{% load i18n %}
 {% with request.resolver_match.view_name as view_name %}
-<header class="navbar navbar-expand-lg navbar-light bg-light shadow">
+<header class="p-3 mb-3 border-bottom">
   <div class="container">
-    {% if view_name != 'homepage:main' %}
-      <a class="navbar-brand" href="{% url 'homepage:main' %}">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+      {% if view_name != 'users:profile' %}
+        <a class="d-flex align-items-center mb-4 mb-lg-0 text-dark text-decoration-none logo-img" href="{% url 'users:profile' %}">
+          <img src="{% static 'img/logo.png' %}" height="40" alt="logo">
+        </a>
+      {% else %}
         <img src="{% static 'img/logo.png' %}" height="40" alt="logo">
-      </a>
-    {% else %}
-    <span class="navbar-brand">
-      <img src="{% static 'img/logo.png' %}" height="40" alt="logo">
-    </span>
-    {% endif %}
+      {% endif %}
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link {% if view_name == 'users:profile' %}disabled{% endif %}" href="{% url 'users:profile' %}">
-            {% translate "Мой профиль" %}
-          </a>
-        </li>
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 nav-list">
+        {% if user.is_authenticated and user.role.name == "student" %}
+          {% if user.role.name == "cook" or user.role.name == "admin" %}
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'users:user_list' %}disabled{% endif %}" href="{% url 'users:user_list' %}">
+              Пользователи
+            </a>
+          </li>
+          {% endif %}
+          {% if user.role.name == "student" %}
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'users:profile' %}disabled{% endif %}" href="{% url 'users:profile' %}">
+              Мой профиль
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link">
+              Статистика
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link">
+              Уведомления
+            </a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link">
+              Меню
+            </a>
+          </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link {% if view_name == 'users:login' %}disabled{% endif %}" href="{% url 'users:login' %}">
-            {% translate "Войти" %}
+          <a class="nav-link px-2 link-dark nav-link {% if view_name == 'users:login' %}disabled{% endif %}" href="{% url 'users:login' %}">
+            Войти
           </a>
         </li>
         {% endif %}
-        <li class="nav-item">
-          <a class="nav-link {% if view_name == 'homepage:main' %}disabled{% endif %}" href="{% url 'homepage:main' %}">
-            {% translate "Главная" %}
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if view_name == 'users:user_list' %}disabled{% endif %}" href="{% url 'users:user_list' %}">
-            {% translate "Пользователи" %}
-          </a>
-        </li>
         {% if user.is_superuser %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'admin:index' %}">
+          <a class="nav-link px-2 link-dark nav-link {% if view_name == 'admin:index' %}disabled{% endif %}" href="{% url 'admin:index' %}">
             Django-Admin
           </a>
         </li>
         {% endif %}
       </ul>
+
     </div>
   </div>
 </header>

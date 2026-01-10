@@ -1,23 +1,40 @@
 import django.contrib.admin
-import django.contrib.auth
 
 import users.models
 
 
-class ProfileInline(django.contrib.admin.TabularInline):
-    model = users.models.Profile
-    can_delete = False
-    readonly_fields = (users.models.Profile.birthday.field.name,)
+User = users.models.User
 
 
-class UserAdmin(django.contrib.auth.admin.UserAdmin):
-    inlines = (ProfileInline,)
+@django.contrib.admin.register(User)
+class UserAdmin(django.contrib.admin.ModelAdmin):
+    list_display = (
+        User.email.field.name,
+        User.first_name.field.name,
+        User.last_name.field.name,
+        User.role.field.name,
+        User.is_active.field.name,
+        User.date_joined.field.name,
+    )
 
+    list_filter = (
+        User.role.field.name,
+        User.is_active.field.name,
+        User.date_joined.field.name,
+    )
 
-django.contrib.admin.site.unregister(
-    django.contrib.auth.models.User,
-)
-django.contrib.admin.site.register(
-    django.contrib.auth.models.User,
-    UserAdmin,
-)
+    search_fields = (
+        User.email.field.name,
+        User.first_name.field.name,
+        User.last_name.field.name,
+    )
+
+    ordering = (f"-{User.date_joined.field.name}",)
+
+    readonly_fields = (
+        User.birthday.field.name,
+        User.attempts_count.field.name,
+        User.block_date.field.name,
+        User.last_login.field.name,
+        User.date_joined.field.name,
+    )

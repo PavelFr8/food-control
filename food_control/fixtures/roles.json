@@ -1,0 +1,5 @@
+[
+  { "model": "users.role", "pk": 1, "fields": { "name": "student" } },
+  { "model": "users.role", "pk": 2, "fields": { "name": "cook" } },
+  { "model": "users.role", "pk": 3, "fields": { "name": "admin" } }
+]

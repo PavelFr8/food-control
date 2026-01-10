@@ -1,8 +1,16 @@
 {% extends "base.html" %}
-{% load i18n %}
 
-{% block title %}{% translate "Выход" %}{% endblock  %}
+{% block title %}Выход{% endblock %}
 
 {% block content %}
-  <h2 class="mt-4">{% translate "Вы успешно вышли" %}.</h2>
-{% endblock  %}
+<div class="container d-flex justify-content-center align-items-center form-card">
+  <div class="col-md-8 col-lg-6">
+    <div class="alert alert-dark shadow-sm rounded-4 text-center p-4">
+      <h2 class="mb-3 text-success-emphasis form-head">Выход</h2>
+      <p class="mb-0">
+        Вы успешно вышли из своего аккаунта.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

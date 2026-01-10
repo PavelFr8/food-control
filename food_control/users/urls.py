@@ -29,7 +29,7 @@ urlpatterns += [
         name="signup",
     ),
     django.urls.path(
-        "activate/<str:username>",
+        "activate/<uidb64>/<token>/",
         users.views.ActivateView.as_view(),
         name="activate",
     ),
@@ -101,7 +101,7 @@ urlpatterns += [
     ),
     django.urls.path(
         "profile/",
-        users.views.ProfileView.as_view(),
+        users.views.UserView.as_view(),
         name="profile",
     ),
 ]

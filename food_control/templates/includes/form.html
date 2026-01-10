@@ -1,14 +1,15 @@
-{% for field in form %}
-<div class="mb-3">
-	{% for error in field.errors %}
-		<div class="alert alert-danger">
-			{{ error | escape}}
-		</div>
-	{% endfor %}
-	{{ field.label_tag }}
-	{{ field }}
-	{% if field.help_text %}
-		<p class="help">{{ field.help_text | safe }}</p>
-	{% endif %}
+{% load widget_tweaks %}
+
+<div class="p-4">
+  {% for field in form %}
+    <div class="mb-3">
+      <p class="form-label">{{ field.label_tag }}</p>
+      {% render_field field class="form-control" %}
+      {% for error in field.errors %}
+        <div class="alert alert-danger mt-1 p-2">
+          {{ error|escape }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
 </div>
-{% endfor %}

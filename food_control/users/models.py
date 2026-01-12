@@ -68,6 +68,15 @@ class FoodFeatures(django.db.models.Model):
         verbose_name = "Пищевая особенность"
         verbose_name_plural = "Пищевые особенности"
 
+    def save(self, *args, **kwargs):
+        if self.name:
+            self.name = self.name.strip().lower().capitalize()
+
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
 
 class Role(django.db.models.Model):
     class RoleNames(django.db.models.TextChoices):
@@ -204,3 +213,11 @@ class User(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         help_text="Специальные разрешения для пользователя.",
         verbose_name="разрешения пользователя",
     )
+
+    def save(self, *args, **kwargs):
+        self.last_name = self.last_name.strip().lower().capitalize()
+        self.first_name = self.first_name.strip().lower().capitalize()
+        if self.patronymic:
+            self.patronymic = self.patronymic.strip().lower().capitalize()
+
+        super().save(*args, **kwargs)

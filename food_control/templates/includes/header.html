@@ -17,7 +17,7 @@
       </button>
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 nav-list">
-        {% if user.is_authenticated and user.role.name == "student" %}
+        {% if user.is_authenticated%}
           {% if user.role.name == "cook" or user.role.name == "admin" %}
           <li class="nav-item">
             <a class="nav-link px-2 link-dark nav-link {% if view_name == 'users:user_list' %}disabled{% endif %}" href="{% url 'users:user_list' %}">
@@ -47,12 +47,6 @@
               Меню
             </a>
           </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link px-2 link-dark nav-link {% if view_name == 'users:login' %}disabled{% endif %}" href="{% url 'users:login' %}">
-            Войти
-          </a>
-        </li>
         {% endif %}
         {% if user.is_superuser %}
         <li class="nav-item">

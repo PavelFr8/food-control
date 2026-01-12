@@ -1,0 +1,32 @@
+.food-chip {
+  cursor: pointer;
+  user-select: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.food-chip input {
+  display: none;
+}
+
+.food-chip.selected {
+  background-color: var(--bs-success-bg-subtle);
+  color: var(--bs-success-text-emphasis);
+}
+
+.food-chip.selected:hover {
+  background-color: var(--bs-danger-bg-subtle);
+  color: var(--bs-danger-text-emphasis);
+}
+
+.food-chip.available {
+  background-color: transparent;
+  color: var(--bs-success);
+  border: 1px dashed var(--bs-success);
+}
+
+.food-chip.available:hover {
+  background-color: var(--bs-success-bg-subtle);
+}

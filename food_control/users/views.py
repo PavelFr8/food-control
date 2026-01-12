@@ -123,19 +123,20 @@ class UserDetailView(
     ]
     model = users.models.User
     template_name = "users/user_detail.html"
-    context_object_name = "user"
+    context_object_name = "detail_user"
 
 
 class UserView(
-    users.forms.RoleRequiredMixin,
-    django.views.generic.TemplateView,
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.UpdateView,
 ):
+    model = users.models.User
+    form_class = users.forms.UserFoodFeaturesForm
     template_name = "users/profile.html"
+    success_url = django.urls.reverse_lazy("users:profile")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["user"] = self.request.user
-        return context
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 class CustomPasswordResetView(django.contrib.auth.views.PasswordResetView):

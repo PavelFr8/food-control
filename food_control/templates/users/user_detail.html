@@ -9,7 +9,7 @@
     <div class="col-lg-8">
 
       <h2 class="text-center mb-4">
-        Мой профиль
+        Профиль
       </h2>
 
       <div class="card shadow-sm rounded-4 mb-4">
@@ -23,14 +23,14 @@
 
             <div>
               <h5 class="mb-1">
-                {{ user.last_name }} {{ user.first_name }}
-                {% if user.patronymic %}
-                  {{ user.patronymic }}
+                {{ detail_user.last_name }} {{ detail_user.first_name }}
+                {% if detail_user.patronymic %}
+                  {{ detail_user.patronymic }}
                 {% endif %}
               </h5>
 
               <div class="text-muted small">
-                {{ user.email }}
+                {{ detail_user.email }}
               </div>
             </div>
           </div>
@@ -39,14 +39,14 @@
 
             <div class="col-md-6">
               <div class="text-muted small">Дата регистрации</div>
-              <div>{{ user.date_joined|date:"d.m.Y" }}</div>
+              <div>{{ detail_user.date_joined|date:"d.m.Y" }}</div>
             </div>
 
             <div class="col-md-6">
               <div class="text-muted small">Класс</div>
               <div>
-                {% if user.school_class %}
-                  {{ user.get_school_class_display }}
+                {% if detail_user.school_class %}
+                  {{ detail_user.get_school_class_display }}
                 {% else %}
                   <span class="text-muted">—</span>
                 {% endif %}
@@ -54,10 +54,29 @@
             </div>
 
             <div class="col-md-6">
-              <div class="text-muted small"Дата рождения</div>
+              <div class="text-muted small">Должность</div>
               <div>
-                {% if user.birthday %}
-                  {{ user.birthday|date:"d.m.Y" }}
+                {% if detail_user.role %}
+                {% if detail_user.role.name == "student" %}
+                  Ученик
+                {% endif %}
+                {% if detail_user.role.name == "cook" %}
+                  Повар
+                {% endif %}
+                {% if detail_user.role.name == "admin" %}
+                  Администратор
+                {% endif %}
+                {% else %}
+                  <span class="text-muted">—</span>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="text-muted small">Дата рождения</div>
+              <div>
+                {% if detail_user.birthday %}
+                  {{ detail_user.birthday|date:"d.m.Y" }}
                 {% else %}
                   <span class="text-muted">—</span>
                 {% endif %}
@@ -67,8 +86,8 @@
             <div class="col-12">
               <div class="text-muted small">Пищевые предпочтения</div>
               <div>
-                {% if user.food_features.exists %}
-                  {% for feature in user.food_features.all %}
+                {% if detail_user.food_features.exists %}
+                  {% for feature in detail_user.food_features.all %}
                     <span class="badge bg-success-subtle text-success-emphasis me-1">
                       {{ feature }}
                     </span>

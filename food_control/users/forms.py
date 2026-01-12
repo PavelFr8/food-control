@@ -74,3 +74,19 @@ class UserForm(
         help_texts = {
             users.models.User.birthday.field.name: "Введите дату рождения",
         }
+
+
+class UserFoodFeaturesForm(django.forms.ModelForm):
+    class Meta:
+        model = users.models.User
+        fields = ("food_features",)
+        widgets = {
+            "food_features": django.forms.CheckboxSelectMultiple,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["food_features"].queryset = (
+            users.models.FoodFeatures.objects.order_by("name")
+        )

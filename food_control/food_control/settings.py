@@ -76,6 +76,8 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "tinymce",
     "core.apps.CoreConfig",
+    "menu.apps.MenuConfig",
+    "rating.apps.RatingConfig",
     "users.apps.UsersConfig",
     "django_cleanup.apps.CleanupConfig",
 ]

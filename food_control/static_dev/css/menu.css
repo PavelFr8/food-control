@@ -1,0 +1,6 @@
+.dish-badge:hover {
+background-color: #e2e6ea !important;
+text-decoration: none;
+transform: scale(1.05);
+transition: 0.2s;
+}

@@ -1,0 +1,36 @@
+.rating-stars {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.rating-stars input {
+  display: none;
+}
+
+.rating-stars label {
+  cursor: pointer;
+  font-size: 2rem;
+  color: #ddd;
+  transition: color 0.2s;
+}
+
+.rating-stars input:checked ~ label,
+.rating-stars label:hover,
+.rating-stars label:hover ~ label {
+  color: #ffc107;
+}
+
+.avg-stars {
+  display: flex;
+}
+
+.avg-stars span {
+  font-size: 2rem;
+  color: #ffc107;
+  margin-right: 0.1rem;
+}
+
+.avg-stars span.empty {
+  color: #ddd;
+}

@@ -17,7 +17,17 @@
       </button>
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 nav-list">
-        {% if user.is_authenticated%}
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'users:profile' %}disabled{% endif %}" href="{% url 'users:profile' %}">
+              Мой профиль
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'menu:menu' %}disabled{% endif %}" href="{% url 'menu:menu' %}">
+              Меню
+            </a>
+          </li>
           {% if user.role.name == "cook" or user.role.name == "admin" %}
           <li class="nav-item">
             <a class="nav-link px-2 link-dark nav-link {% if view_name == 'users:user_list' %}disabled{% endif %}" href="{% url 'users:user_list' %}">
@@ -26,11 +36,6 @@
           </li>
           {% endif %}
           {% if user.role.name == "student" %}
-          <li class="nav-item">
-            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'users:profile' %}disabled{% endif %}" href="{% url 'users:profile' %}">
-              Мой профиль
-            </a>
-          </li>
           <li class="nav-item">
             <a class="nav-link px-2 link-dark nav-link">
               Статистика
@@ -42,11 +47,6 @@
             </a>
           </li>
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link px-2 link-dark nav-link">
-              Меню
-            </a>
-          </li>
         {% endif %}
         {% if user.is_superuser %}
         <li class="nav-item">

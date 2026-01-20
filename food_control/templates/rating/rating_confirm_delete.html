@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 class="mt-3">Подтвердите удаление</h2>
+  <p>Вы уверены, что хотите удалить свою оценку?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="{% url 'menu:dish_detail' pk=object.dish.pk %}" class="btn btn-secondary">Отменить</a>
+  </form>
+{% endblock %}

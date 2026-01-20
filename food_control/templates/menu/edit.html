@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Редактирование меню{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">{{ view.template_name|cut:".html"|capfirst }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a href="{% url 'menu:menu' %}" class="btn btn-secondary ms-2">Отмена</a>
+    </form>
+</div>
+{% endblock %}

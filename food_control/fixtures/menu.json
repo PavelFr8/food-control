@@ -1,0 +1,206 @@
+[
+  {
+    "model": "menu.dish",
+    "pk": 1,
+    "fields": {"name": "Чай", "description": "Чайные листья, вода", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 1, "fields": {"dish": 1, "name": "Чайные листья", "quantity": 2, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 2, "fields": {"dish": 1, "name": "Вода", "quantity": 200, "unit": "мл"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 2,
+    "fields": {"name": "Кофе", "description": "Кофейные зёрна, вода", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 3, "fields": {"dish": 2, "name": "Кофейные зёрна", "quantity": 10, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 4, "fields": {"dish": 2, "name": "Вода", "quantity": 200, "unit": "мл"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 3,
+    "fields": {"name": "Какао", "description": "Молоко, какао-порошок", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 5, "fields": {"dish": 3, "name": "Молоко", "quantity": 200, "unit": "мл"}},
+  {"model": "menu.ingredient", "pk": 6, "fields": {"dish": 3, "name": "Какао-порошок", "quantity": 20, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 4,
+    "fields": {"name": "Компот", "description": "Фрукты, вода", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 7, "fields": {"dish": 4, "name": "Фрукты", "quantity": 150, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 8, "fields": {"dish": 4, "name": "Вода", "quantity": 200, "unit": "мл"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 5,
+    "fields": {"name": "Морс", "description": "Ягоды, вода", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 9, "fields": {"dish": 5, "name": "Ягоды", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 10, "fields": {"dish": 5, "name": "Вода", "quantity": 200, "unit": "мл"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 6,
+    "fields": {"name": "Кисель", "description": "Крахмал, ягоды, вода", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 11, "fields": {"dish": 6, "name": "Крахмал", "quantity": 20, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 12, "fields": {"dish": 6, "name": "Ягоды", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 13, "fields": {"dish": 6, "name": "Вода", "quantity": 150, "unit": "мл"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 7,
+    "fields": {"name": "Сырники", "description": "Творог, мука, яйцо, сахар", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 14, "fields": {"dish": 7, "name": "Творог", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 15, "fields": {"dish": 7, "name": "Мука", "quantity": 20, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 16, "fields": {"dish": 7, "name": "Яйцо", "quantity": 1, "unit": "шт"}},
+  {"model": "menu.ingredient", "pk": 17, "fields": {"dish": 7, "name": "Сахар", "quantity": 10, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 8,
+    "fields": {"name": "Творожники", "description": "Творог, яйцо", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 18, "fields": {"dish": 8, "name": "Творог", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 19, "fields": {"dish": 8, "name": "Яйцо", "quantity": 1, "unit": "шт"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 9,
+    "fields": {"name": "Омлет", "description": "Яйца, молоко, соль", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 20, "fields": {"dish": 9, "name": "Яйца", "quantity": 2, "unit": "шт"}},
+  {"model": "menu.ingredient", "pk": 21, "fields": {"dish": 9, "name": "Молоко", "quantity": 50, "unit": "мл"}},
+  {"model": "menu.ingredient", "pk": 22, "fields": {"dish": 9, "name": "Соль", "quantity": 1, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 10,
+    "fields": {"name": "Блины", "description": "Мука, молоко, яйца, сахар", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 23, "fields": {"dish": 10, "name": "Мука", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 24, "fields": {"dish": 10, "name": "Молоко", "quantity": 100, "unit": "мл"}},
+  {"model": "menu.ingredient", "pk": 25, "fields": {"dish": 10, "name": "Яйца", "quantity": 2, "unit": "шт"}},
+  {"model": "menu.ingredient", "pk": 26, "fields": {"dish": 10, "name": "Сахар", "quantity": 10, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 11,
+    "fields": {"name": "Свинина по мексикански с макаронами", "description": "Свинина, макароны, специи", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 27, "fields": {"dish": 11, "name": "Свинина", "quantity": 150, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 28, "fields": {"dish": 11, "name": "Макароны", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 29, "fields": {"dish": 11, "name": "Специи", "quantity": 5, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 12,
+    "fields": {"name": "Пельмени", "description": "Мясо, тесто, соль", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 30, "fields": {"dish": 12, "name": "Тесто", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 31, "fields": {"dish": 12, "name": "Мясо", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 32, "fields": {"dish": 12, "name": "Соль", "quantity": 1, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 13,
+    "fields": {"name": "Гречка с котлетами", "description": "Гречка, котлета, соль", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 33, "fields": {"dish": 13, "name": "Гречка", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 34, "fields": {"dish": 13, "name": "Котлета", "quantity": 120, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 35, "fields": {"dish": 13, "name": "Соль", "quantity": 1, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 14,
+    "fields": {"name": "Пюре с фаршем", "description": "Картофельное пюре, фарш, масло", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 36, "fields": {"dish": 14, "name": "Картофельное пюре", "quantity": 150, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 37, "fields": {"dish": 14, "name": "Фарш", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 38, "fields": {"dish": 14, "name": "Масло", "quantity": 10, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 15,
+    "fields": {"name": "Говядина с гречкой", "description": "Говядина, гречка, соль", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 39, "fields": {"dish": 15, "name": "Говядина", "quantity": 150, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 40, "fields": {"dish": 15, "name": "Гречка", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 41, "fields": {"dish": 15, "name": "Соль", "quantity": 1, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 16,
+    "fields": {"name": "Гороховый суп", "description": "Горох, вода, специи", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 42, "fields": {"dish": 16, "name": "Горох", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 43, "fields": {"dish": 16, "name": "Вода", "quantity": 200, "unit": "мл"}},
+  {"model": "menu.ingredient", "pk": 44, "fields": {"dish": 16, "name": "Специи", "quantity": 5, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 17,
+    "fields": {"name": "Куриный бульон", "description": "Курица, вода, соль", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 45, "fields": {"dish": 17, "name": "Курица", "quantity": 150, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 46, "fields": {"dish": 17, "name": "Вода", "quantity": 200, "unit": "мл"}},
+  {"model": "menu.ingredient", "pk": 47, "fields": {"dish": 17, "name": "Соль", "quantity": 1, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 18,
+    "fields": {"name": "Борщ", "description": "Свекла, капуста, вода, мясо", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 48, "fields": {"dish": 18, "name": "Свекла", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 49, "fields": {"dish": 18, "name": "Капуста", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 50, "fields": {"dish": 18, "name": "Вода", "quantity": 200, "unit": "мл"}},
+  {"model": "menu.ingredient", "pk": 51, "fields": {"dish": 18, "name": "Мясо", "quantity": 50, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 19,
+    "fields": {"name": "Суп с фрикадельками", "description": "Фарш, вода, специи", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 52, "fields": {"dish": 19, "name": "Фарш", "quantity": 100, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 53, "fields": {"dish": 19, "name": "Вода", "quantity": 200, "unit": "мл"}},
+  {"model": "menu.ingredient", "pk": 54, "fields": {"dish": 19, "name": "Специи", "quantity": 5, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 20,
+    "fields": {"name": "Суп с вермишелью", "description": "Вермишель, вода, соль", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 55, "fields": {"dish": 20, "name": "Вермишель", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 56, "fields": {"dish": 20, "name": "Вода", "quantity": 200, "unit": "мл"}},
+  {"model": "menu.ingredient", "pk": 57, "fields": {"dish": 20, "name": "Соль", "quantity": 1, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 21,
+    "fields": {"name": "Винегрет", "description": "Свекла, картофель, морковь, солёные огурцы", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 58, "fields": {"dish": 21, "name": "Свекла", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 59, "fields": {"dish": 21, "name": "Картофель", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 60, "fields": {"dish": 21, "name": "Морковь", "quantity": 30, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 61, "fields": {"dish": 21, "name": "Солёные огурцы", "quantity": 20, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 22,
+    "fields": {"name": "Овощной салат", "description": "Помидоры, огурцы, перец", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 62, "fields": {"dish": 22, "name": "Помидоры", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 63, "fields": {"dish": 22, "name": "Огурцы", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 64, "fields": {"dish": 22, "name": "Перец", "quantity": 30, "unit": "г"}},
+
+  {
+    "model": "menu.dish",
+    "pk": 23,
+    "fields": {"name": "Салат с соленьями", "description": "Капуста, морковь, солёные огурцы", "features": []}
+  },
+  {"model": "menu.ingredient", "pk": 65, "fields": {"dish": 23, "name": "Капуста", "quantity": 50, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 66, "fields": {"dish": 23, "name": "Морковь", "quantity": 30, "unit": "г"}},
+  {"model": "menu.ingredient", "pk": 67, "fields": {"dish": 23, "name": "Солёные огурцы", "quantity": 20, "unit": "г"}}
+]

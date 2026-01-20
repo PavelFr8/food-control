@@ -5,13 +5,23 @@ import django.contrib.auth.urls
 import django.contrib.staticfiles.urls
 import django.urls
 
+import menu.urls
+import menu.views
+import rating.urls
 import users.urls
 
 
 urlpatterns = [
+    django.urls.path(
+        "",
+        menu.views.MenuView.as_view(),
+        name="menu",
+    ),
     django.urls.path("admin/", django.contrib.admin.site.urls),
+    django.urls.path("menu/", django.urls.include(menu.urls)),
     django.urls.path("users/", django.urls.include(users.urls)),
     django.urls.path("users/", django.urls.include(django.contrib.auth.urls)),
+    django.urls.path("rating/", django.urls.include(rating.urls)),
 ]
 
 

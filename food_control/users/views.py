@@ -15,7 +15,7 @@ import django.utils
 import django.utils.timezone
 import django.views.generic
 
-
+import meals.models
 import users.forms
 import users.models
 
@@ -100,30 +100,42 @@ class ReactivateView(django.views.generic.View):
         return django.shortcuts.redirect("users:profile")
 
 
-class UserListView(
-    users.forms.RoleRequiredMixin,
-    django.views.generic.ListView,
-):
-    required_roles = [
-        users.models.Role.RoleNames.ADMIN,
-        users.models.Role.RoleNames.COOK,
-    ]
-    template_name = "users/user_list.html"
-    queryset = users.models.User.objects.filter(is_active=True)
-    context_object_name = "users"
-
-
 class UserDetailView(
     users.forms.RoleRequiredMixin,
     django.views.generic.DetailView,
 ):
     required_roles = [
-        users.models.Role.RoleNames.ADMIN,
         users.models.Role.RoleNames.COOK,
     ]
     model = users.models.User
     template_name = "users/user_detail.html"
     context_object_name = "detail_user"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.object
+        today = django.utils.timezone.now().date()
+
+        access = getattr(user, "food_access", None)
+
+        has_access = bool(
+            access and access.is_active and access.meals_left > 0,
+        )
+
+        meals_today = set(
+            meals.models.Meal.objects.filter(
+                user=user,
+                date=today,
+            ).values_list("meal_type", flat=True),
+        )
+
+        context.update(
+            {
+                "has_food_access": has_access,
+                "meals_today": meals_today,
+            },
+        )
+        return context
 
 
 class UserView(

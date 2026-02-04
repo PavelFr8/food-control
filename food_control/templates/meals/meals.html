@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Выдача питания{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h1 class="mb-3">Ученики</h1>
+
+    <form method="get" class="mb-4">
+        <input
+            type="text"
+            name="q"
+            value="{{ query }}"
+            class="form-control"
+            placeholder="Поиск по имени или фамилии…"
+        >
+    </form>
+
+    <div class="list-group">
+        {% for user in users %}
+            {% include "includes/user_card.html" %}
+        {% empty %}
+            <div class="text-muted">
+                Пользователи не найдены
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

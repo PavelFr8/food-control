@@ -28,10 +28,10 @@
               Меню
             </a>
           </li>
-          {% if user.role.name == "cook" or user.role.name == "admin" %}
+          {% if user.role.name == "cook" %}
           <li class="nav-item">
-            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'users:user_list' %}disabled{% endif %}" href="{% url 'users:user_list' %}">
-              Пользователи
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'meals:meals' %}disabled{% endif %}" href="{% url 'meals:meals' %}">
+              Выдача питания
             </a>
           </li>
           {% endif %}

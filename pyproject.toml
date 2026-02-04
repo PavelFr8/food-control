@@ -1,5 +1,5 @@
 [tool.flake8]
-application-import-names = "core,users,menu,rating"
+application-import-names = "core,users,menu,rating,payments,meals"
 import-order-style = "google"
 
 exclude = "venv, .venv, .env, .git, __pycache__, db.json, migrations, manage.py"

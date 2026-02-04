@@ -91,6 +91,7 @@ class Ingredient(django.db.models.Model):
 class BreakfastMenu(django.db.models.Model):
     drink1 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="первый напиток",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
@@ -98,6 +99,7 @@ class BreakfastMenu(django.db.models.Model):
     )
     drink2 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="второй напиток",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
@@ -106,6 +108,7 @@ class BreakfastMenu(django.db.models.Model):
 
     dish1 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="первое блюдо",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
@@ -114,6 +117,7 @@ class BreakfastMenu(django.db.models.Model):
 
     dish2 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="второе блюдо",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
@@ -131,13 +135,16 @@ class BreakfastMenu(django.db.models.Model):
 class LunchMenu(django.db.models.Model):
     drink1 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="первый напиток",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
         related_name="lunch_drink1",
     )
+
     drink2 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="второй напиток",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
@@ -146,13 +153,16 @@ class LunchMenu(django.db.models.Model):
 
     soup1 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="первый суп",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
         related_name="lunch_soup1",
     )
+
     soup2 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="второй суп",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
@@ -161,6 +171,7 @@ class LunchMenu(django.db.models.Model):
 
     main = django.db.models.ForeignKey(
         Dish,
+        verbose_name="основое блюдо",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
@@ -169,13 +180,16 @@ class LunchMenu(django.db.models.Model):
 
     salad1 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="первый салат",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,
         related_name="lunch_salad1",
     )
+
     salad2 = django.db.models.ForeignKey(
         Dish,
+        verbose_name="второй салат",
         on_delete=django.db.models.PROTECT,
         null=True,
         blank=True,

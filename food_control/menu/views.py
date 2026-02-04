@@ -6,6 +6,8 @@ import django.views.generic
 import menu.forms
 import menu.models
 import rating.forms
+import users.forms
+import users.models
 
 
 class MenuView(
@@ -101,7 +103,13 @@ class DishDetailView(
         )
 
 
-class EditBreakfastMenuView(django.views.View):
+class EditBreakfastMenuView(
+    django.views.View,
+    users.forms.RoleRequiredMixin,
+):
+    required_roles = [
+        users.models.Role.RoleNames.ADMIN,
+    ]
     template_name = "menu/edit.html"
 
     def get(self, request):

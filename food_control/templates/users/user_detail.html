@@ -105,14 +105,45 @@
       <div class="card shadow-sm rounded-4">
         <div class="card-body p-4">
 
-          <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+          <div class="text-muted small mb-3">
+            Выдача питания
+          </div>
 
-            <a href=""
-               class="btn btn-outline-success">
-              Уга буга
-            </a>
+          <div class="d-grid gap-2 d-md-flex">
+
+            {# ===== Завтрак ===== #}
+            <form method="post"
+                  action="{% url 'meals:consume_meal' detail_user.id 'breakfast' %}">
+              {% csrf_token %}
+              <button type="submit"
+                      class="btn btn-outline-primary"
+                      {% if not has_food_access or 'breakfast' in meals_today %}
+                        disabled
+                      {% endif %}>
+                🍳 Завтрак
+              </button>
+            </form>
+
+            {# ===== Обед ===== #}
+            <form method="post"
+                  action="{% url 'meals:consume_meal' detail_user.id 'lunch' %}">
+              {% csrf_token %}
+              <button type="submit"
+                      class="btn btn-outline-success"
+                      {% if not has_food_access or 'lunch' in meals_today %}
+                        disabled
+                      {% endif %}>
+                🍲 Обед
+              </button>
+            </form>
 
           </div>
+
+          {% if not has_food_access %}
+            <div class="text-danger small mt-3">
+              Нет активного абонемента или закончились приёмы пищи
+            </div>
+          {% endif %}
 
         </div>
       </div>

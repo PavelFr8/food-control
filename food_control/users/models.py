@@ -16,6 +16,9 @@ class UserManager(auth_models.BaseUserManager):
     def get_queryset(self):
         return super().get_queryset().select_related("role")
 
+    def get_students(self):
+        return self.get_queryset().filter(role__name="student")
+
     def active(self):
         return self.get_queryset().filter(is_active=True)
 

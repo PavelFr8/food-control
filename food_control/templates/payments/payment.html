@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Оплата{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <h3 class="mb-4 text-center">Оплата питания</h3>
+
+      <form method="post">
+        {% csrf_token %}
+
+        {% for radio in form.payment_type %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <label class="form-check">
+                {{ radio.tag }}
+                {{ radio.choice_label }}
+              </label>
+            </div>
+          </div>
+        {% endfor %}
+        {{ form.idempotency_key }}
+
+        <button type="submit" class="btn btn-success w-100">
+          Перейти к оплате
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

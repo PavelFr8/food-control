@@ -66,74 +66,93 @@
                 {% endif %}
               </div>
             </div>
+            
+            {% if user.role.name == "student" %}
 
-            <div class="col-12">
-              <div class="text-muted small mb-1">Пищевые предпочтения</div>
+              <div class="col-12">
+                <div class="text-muted small mb-1">Пищевые предпочтения</div>
 
-              {% if user.food_features.exists %}
-                {% for feature in user.food_features.all %}
-                  <span class="badge bg-success-subtle text-success-emphasis me-1 mb-1">
-                    {{ feature }}
-                  </span>
-                {% endfor %}
-              {% else %}
-                <span class="text-muted">—</span>
-              {% endif %}
-            </div>
+                {% if user.food_features.exists %}
+                  {% for feature in user.food_features.all %}
+                    <span class="badge bg-success-subtle text-success-emphasis me-1 mb-1">
+                      {{ feature }}
+                    </span>
+                  {% endfor %}
+                {% else %}
+                  <span class="text-muted">—</span>
+                {% endif %}
+              </div>
+              <hr class="my-4">
+
+              <button
+                class="btn btn-outline-success btn-sm"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#foodFeaturesForm"
+              >
+                ✏️ Редактировать пищевые предпочтения
+              </button>
+              <div class="collapse mt-3" id="foodFeaturesForm">
+                <form method="post">
+                  {% csrf_token %}
+
+                  <div class="mb-2">
+                    <div class="text-muted small mb-1">Выбрано</div>
+                    <div id="selected-features" class="d-flex flex-wrap gap-2"></div>
+                  </div>
+
+                  <div class="mt-3">
+                    <div class="text-muted small mb-1">Можно добавить</div>
+                    <div id="available-features" class="d-flex flex-wrap gap-2"></div>
+                  </div>
+
+                  <!-- отсюда js всё раскидывает (Пашок) -->
+                  <div id="all-features" class="d-none">
+                    {% for checkbox in form.food_features %}
+                      <label class="food-chip">
+                        {{ checkbox.tag }}
+                        {{ checkbox.choice_label }}
+                      </label>
+                    {% endfor %}
+                  </div>
+
+                  <div class="mt-3 d-flex gap-2">
+                    <button type="submit" class="btn btn-success btn-sm">
+                      Сохранить
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary btn-sm"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#foodFeaturesForm"
+                    >
+                      Отмена
+                    </button>
+                  </div>
+                </form>
+              </div>
+
             <hr class="my-4">
 
-            <button
-              class="btn btn-outline-success btn-sm"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#foodFeaturesForm"
-            >
-              ✏️ Редактировать пищевые предпочтения
-            </button>
-            <div class="collapse mt-3" id="foodFeaturesForm">
-              <form method="post">
-                {% csrf_token %}
+            <div>
+              <div class="text-muted small">Доступ к питанию</div>
 
-                <div class="mb-2">
-                  <div class="text-muted small mb-1">Выбрано</div>
-                  <div id="selected-features" class="d-flex flex-wrap gap-2"></div>
-                </div>
-
-                <div class="mt-3">
-                  <div class="text-muted small mb-1">Можно добавить</div>
-                  <div id="available-features" class="d-flex flex-wrap gap-2"></div>
-                </div>
-
-                <!-- отсюда js всё раскидывает (Пашок) -->
-                <div id="all-features" class="d-none">
-                  {% for checkbox in form.food_features %}
-                    <label class="food-chip">
-                      {{ checkbox.tag }}
-                      {{ checkbox.choice_label }}
-                    </label>
-                  {% endfor %}
-                </div>
-
-                <div class="mt-3 d-flex gap-2">
-                  <button type="submit" class="btn btn-success btn-sm">
-                    Сохранить
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-outline-secondary btn-sm"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#foodFeaturesForm"
-                  >
-                    Отмена
-                  </button>
-                </div>
-              </form>
+              {% if user.food_access and user.food_access.is_active %}
+                <strong>
+                  Осталось приёмов пищи: {{ user.food_access.meals_left }}
+                </strong>
+              {% else %}
+                <span class="text-muted">Нет активного доступа</span>
+              {% endif %}
             </div>
 
+            <a href="{% url 'payments:payment' %}" class="btn btn-success btn-sm mt-2">
+              🍽 Оплатить питание
+            </a>
+            </div>
           </div>
         </div>
-      </div>
-
+      {% endif %}
       <div class="card shadow-sm rounded-4">
         <div class="card-body p-4">
 

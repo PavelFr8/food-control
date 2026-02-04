@@ -90,11 +90,6 @@ urlpatterns += [
 # User profile and list
 urlpatterns += [
     django.urls.path(
-        "user_list/",
-        users.views.UserListView.as_view(),
-        name="user_list",
-    ),
-    django.urls.path(
         "user_details/<int:pk>",
         users.views.UserDetailView.as_view(),
         name="user_detail",

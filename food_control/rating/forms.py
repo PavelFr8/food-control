@@ -2,9 +2,14 @@ import django.forms
 
 from core.forms import BootstrapFormMixin
 import rating.models
+import users.forms
 
 
-class RatingForm(BootstrapFormMixin, django.forms.ModelForm):
+class RatingForm(
+    BootstrapFormMixin,
+    django.forms.ModelForm,
+    users.forms.RoleRequiredMixin,
+):
     class Meta:
         model = rating.models.Rating
         fields = (

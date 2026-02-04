@@ -79,6 +79,8 @@ INSTALLED_APPS = [
     "menu.apps.MenuConfig",
     "rating.apps.RatingConfig",
     "users.apps.UsersConfig",
+    "payments.apps.PaymentsConfig",
+    "meals.apps.MealsConfig",
     "django_cleanup.apps.CleanupConfig",
 ]
 

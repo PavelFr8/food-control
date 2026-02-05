@@ -24,6 +24,22 @@ class ConsumeMealView(
         return django.shortcuts.redirect("meals:meals")
 
 
+class StudentConsumeMealView(
+    users.forms.RoleRequiredMixin,
+    django.views.generic.View,
+):
+    required_roles = [
+        users.models.Role.RoleNames.STUDENT,
+    ]
+
+    def post(self, request, *args, **kwargs):
+        payments.services.consume_meal(
+            user=request.user,
+            meal_type=kwargs.get("meal_type"),
+        )
+        return django.shortcuts.redirect("users:profile")
+
+
 class MealsView(users.forms.RoleRequiredMixin, django.views.generic.ListView):
     required_roles = [
         users.models.Role.RoleNames.ADMIN,

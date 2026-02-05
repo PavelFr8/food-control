@@ -81,6 +81,8 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "payments.apps.PaymentsConfig",
     "meals.apps.MealsConfig",
+    "inventory.apps.InventoryConfig",
+    "notifications.apps.NotificationsConfig",
     "django_cleanup.apps.CleanupConfig",
 ]
 

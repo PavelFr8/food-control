@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Статистика{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="mb-4">Статистика оплат и посещаемости</h2>
+
+  <form method="get" class="row g-3 align-items-end mb-4">
+    <div class="col-md-3">
+      <label class="form-label">С</label>
+      <input type="date" name="start" class="form-control" value="{{ start_date|date:'Y-m-d' }}">
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">По</label>
+      <input type="date" name="end" class="form-control" value="{{ end_date|date:'Y-m-d' }}">
+    </div>
+    <div class="col-md-3">
+      <button type="submit" class="btn btn-success w-100">Показать</button>
+    </div>
+    <div class="col-md-3">
+      <a href="{% url 'payments:stats_report' %}?start={{ start_date|date:'Y-m-d' }}&end={{ end_date|date:'Y-m-d' }}" class="btn btn-outline-secondary w-100">
+        Скачать отчет (CSV)
+      </a>
+    </div>
+  </form>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="text-muted small">Сумма оплат</div>
+          <h4 class="mb-0">{{ total_amount }} ₽</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="text-muted small">Количество оплат</div>
+          <h4 class="mb-0">{{ total_count }}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="text-muted small">Выдано приемов пищи</div>
+          <h4 class="mb-0">{{ attendance_count }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <h5>Оплаты по дням</h5>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Количество</th>
+              <th>Сумма</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in payment_by_day %}
+              <tr>
+                <td>{{ row.created__date|date:"d.m.Y" }}</td>
+                <td>{{ row.count }}</td>
+                <td>{{ row.total }} ₽</td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="3" class="text-muted text-center">Нет данных за период.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <h5>Посещаемость по дням</h5>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Количество выдач</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in meals_by_day %}
+              <tr>
+                <td>{{ row.date|date:"d.m.Y" }}</td>
+                <td>{{ row.count }}</td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="2" class="text-muted text-center">Нет данных за период.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

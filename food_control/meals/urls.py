@@ -16,4 +16,9 @@ urlpatterns = [
         meals.views.ConsumeMealView.as_view(),
         name="consume_meal",
     ),
+    django.urls.path(
+        "consume/self/<str:meal_type>/",
+        meals.views.StudentConsumeMealView.as_view(),
+        name="consume_meal_self",
+    ),
 ]

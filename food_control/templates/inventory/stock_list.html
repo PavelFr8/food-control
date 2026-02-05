@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Склад{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Остатки продуктов</h2>
+    <a href="{% url 'inventory:stock_add' %}" class="btn btn-success btn-sm">
+      Добавить позицию
+    </a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Продукт</th>
+          <th>Остаток</th>
+          <th>Единица</th>
+          <th>Обновлено</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in stock_items %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unit }}</td>
+            <td>{{ item.updated_at|date:"d.m.Y H:i" }}</td>
+            <td class="text-end">
+              <a href="{% url 'inventory:stock_edit' item.pk %}" class="btn btn-outline-secondary btn-sm">
+                Изменить
+              </a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5" class="text-muted text-center">Нет данных по остаткам.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

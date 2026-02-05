@@ -34,15 +34,39 @@
               Выдача питания
             </a>
           </li>
-          {% endif %}
-          {% if user.role.name == "student" %}
           <li class="nav-item">
-            <a class="nav-link px-2 link-dark nav-link">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'inventory:stock_list' %}disabled{% endif %}" href="{% url 'inventory:stock_list' %}">
+              Склад
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'inventory:procurement_list' %}disabled{% endif %}" href="{% url 'inventory:procurement_list' %}">
+              Закупки
+            </a>
+          </li>
+          {% endif %}
+          {% if user.role.name == "admin" %}
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'payments:stats' %}disabled{% endif %}" href="{% url 'payments:stats' %}">
               Статистика
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-2 link-dark nav-link">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'inventory:procurement_list' %}disabled{% endif %}" href="{% url 'inventory:procurement_list' %}">
+              Заявки
+            </a>
+          </li>
+          {% endif %}
+          {% if user.role.name == "student" %}
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'notifications:list' %}disabled{% endif %}" href="{% url 'notifications:list' %}">
+              Уведомления
+            </a>
+          </li>
+          {% endif %}
+          {% if user.role.name != "student" %}
+          <li class="nav-item">
+            <a class="nav-link px-2 link-dark nav-link {% if view_name == 'notifications:list' %}disabled{% endif %}" href="{% url 'notifications:list' %}">
               Уведомления
             </a>
           </li>

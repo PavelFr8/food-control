@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Согласование заявки{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="mb-4">Согласование заявки</h2>
+      <div class="mb-3 text-muted">
+        {{ object.item_name }} — {{ object.quantity }} {{ object.unit }}
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-success">Сохранить</button>
+          <a href="{% url 'inventory:procurement_list' %}" class="btn btn-outline-secondary">Назад</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

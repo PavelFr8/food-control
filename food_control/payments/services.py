@@ -2,6 +2,7 @@ import django.core.exceptions
 import django.db.transaction
 
 import meals.models
+import notifications.services
 import payments.models
 
 
@@ -33,6 +34,16 @@ def apply_payment(*, user, payment_type, idempotency_key):
     access.meals_left += meals
     access.is_active = access.meals_left > 0
     access.save(update_fields=("meals_left", "is_active"))
+
+    notifications.services.notify_user(
+        user=user,
+        title="Оплата питания",
+        message=(
+            f"Платёж успешно выполнен. "
+            f"Доступно приёмов пищи: {access.meals_left}."
+        ),
+        link="/users/profile/",
+    )
 
 
 @django.db.transaction.atomic

@@ -150,6 +150,24 @@ class UserView(
     def get_object(self, queryset=None):
         return self.request.user
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.role.name == users.models.Role.RoleNames.STUDENT:
+            today = django.utils.timezone.now().date()
+            access = getattr(user, "food_access", None)
+            context["has_food_access"] = bool(
+                access and access.is_active and access.meals_left > 0,
+            )
+            context["meals_today"] = set(
+                meals.models.Meal.objects.filter(
+                    user=user,
+                    date=today,
+                ).values_list("meal_type", flat=True),
+            )
+
+        return context
+
 
 class CustomPasswordResetView(django.contrib.auth.views.PasswordResetView):
     template_name = "users/password_reset.html"

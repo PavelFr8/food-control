@@ -5,9 +5,11 @@ import django.contrib.auth.urls
 import django.contrib.staticfiles.urls
 import django.urls
 
+import inventory.urls
 import meals.urls
 import menu.urls
 import menu.views
+import notifications.urls
 import payments.urls
 import rating.urls
 import users.urls
@@ -26,6 +28,10 @@ urlpatterns = [
     django.urls.path("users/", django.urls.include(django.contrib.auth.urls)),
     django.urls.path("rating/", django.urls.include(rating.urls)),
     django.urls.path("payments/", django.urls.include(payments.urls)),
+    django.urls.path("inventory/", django.urls.include(inventory.urls)),
+    django.urls.path(
+        "notifications/", django.urls.include(notifications.urls),
+    ),
 ]
 
 

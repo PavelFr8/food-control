@@ -26,7 +26,6 @@ class ConsumeMealView(
 
 class MealsView(users.forms.RoleRequiredMixin, django.views.generic.ListView):
     required_roles = [
-        users.models.Role.RoleNames.ADMIN,
         users.models.Role.RoleNames.COOK,
     ]
     template_name = "meals/meals.html"

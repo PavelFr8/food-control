@@ -30,7 +30,8 @@ urlpatterns = [
     django.urls.path("payments/", django.urls.include(payments.urls)),
     django.urls.path("inventory/", django.urls.include(inventory.urls)),
     django.urls.path(
-        "notifications/", django.urls.include(notifications.urls),
+        "notifications/",
+        django.urls.include(notifications.urls),
     ),
 ]
 

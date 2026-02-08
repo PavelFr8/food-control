@@ -38,6 +38,22 @@ git clone https://github.com/PavelFr8/food-control
 cd food-control
 ```
 
+### Задание переменных окружения
+
+Скопируйте файл с примером переменных окружения:
+
+Для Linux/Mac:
+
+```bash
+cp prod.env .env
+```
+
+Для Windows:
+
+```bash
+copy prod.env .env
+```
+
 ### Сборка и запуск веб-приложения
 
 ```bash
@@ -88,13 +104,13 @@ pip install -r requirements/dev.txt
 Для Linux/Mac:
 
 ```bash
-cp template.env .env
+cp dev.env .env
 ```
 
 Для Windows:
 
 ```bash
-copy template.env .env
+copy dev.env .env
 ```
 
 **Примечание:** Не забудьте изменить значения переменных в `.env` в соответствии с вашими настройками.
@@ -142,5 +158,4 @@ python3 manage.py runserver
 
 ## ER-диаграммы базы данных
 
-
-На данный момент отсутствуют
+![db](docs/db.svg)

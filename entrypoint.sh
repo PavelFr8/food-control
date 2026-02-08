@@ -14,6 +14,8 @@ python manage.py loaddata fixtures/menu.json
 
 python manage.py loaddata fixtures/users.json
 
+python manage.py loaddata fixtures/preffs.json
+
 python manage.py loaddata fixtures/payments.json
 
 python manage.py loaddata fixtures/meals.json

@@ -1,0 +1,22 @@
+[
+  {"model": "meals.meal", "pk": 1, "fields": {"user": 1, "meal_type": "breakfast", "date": "2026-01-20"}},
+  {"model": "meals.meal", "pk": 2, "fields": {"user": 1, "meal_type": "lunch", "date": "2026-01-20"}},
+  {"model": "meals.meal", "pk": 3, "fields": {"user": 2, "meal_type": "breakfast", "date": "2026-01-21"}},
+  {"model": "meals.meal", "pk": 4, "fields": {"user": 2, "meal_type": "dinner", "date": "2026-01-21"}},
+  {"model": "meals.meal", "pk": 5, "fields": {"user": 3, "meal_type": "lunch", "date": "2026-01-22"}},
+  {"model": "meals.meal", "pk": 6, "fields": {"user": 3, "meal_type": "breakfast", "date": "2026-01-22"}},
+  {"model": "meals.meal", "pk": 7, "fields": {"user": 4, "meal_type": "dinner", "date": "2026-01-23"}},
+  {"model": "meals.meal", "pk": 8, "fields": {"user": 4, "meal_type": "lunch", "date": "2026-01-23"}},
+  {"model": "meals.meal", "pk": 9, "fields": {"user": 5, "meal_type": "breakfast", "date": "2026-01-24"}},
+  {"model": "meals.meal", "pk": 10, "fields": {"user": 5, "meal_type": "lunch", "date": "2026-01-24"}},
+  {"model": "meals.meal", "pk": 11, "fields": {"user": 6, "meal_type": "breakfast", "date": "2026-01-25"}},
+  {"model": "meals.meal", "pk": 12, "fields": {"user": 6, "meal_type": "dinner", "date": "2026-01-25"}},
+  {"model": "meals.meal", "pk": 13, "fields": {"user": 7, "meal_type": "lunch", "date": "2026-01-26"}},
+  {"model": "meals.meal", "pk": 14, "fields": {"user": 8, "meal_type": "breakfast", "date": "2026-01-27"}},
+  {"model": "meals.meal", "pk": 15, "fields": {"user": 8, "meal_type": "dinner", "date": "2026-01-27"}},
+  {"model": "meals.meal", "pk": 16, "fields": {"user": 9, "meal_type": "lunch", "date": "2026-01-28"}},
+  {"model": "meals.meal", "pk": 17, "fields": {"user": 9, "meal_type": "breakfast", "date": "2026-01-28"}},
+  {"model": "meals.meal", "pk": 18, "fields": {"user": 10, "meal_type": "dinner", "date": "2026-01-29"}},
+  {"model": "meals.meal", "pk": 19, "fields": {"user": 11, "meal_type": "breakfast", "date": "2026-01-30"}},
+  {"model": "meals.meal", "pk": 20, "fields": {"user": 11, "meal_type": "lunch", "date": "2026-01-30"}}
+]

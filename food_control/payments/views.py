@@ -6,6 +6,7 @@ import django.urls
 import django.utils.dateparse
 import django.utils.timezone
 import django.views.generic
+import openpyxl
 
 import meals.models
 import payments.forms
@@ -153,14 +154,18 @@ class AdminReportDownloadView(
             date__range=(start_date, end_date),
         )
 
-        response = django.http.HttpResponse(
-            content_type="text/csv",
-        )
-        response["Content-Disposition"] = (
-            f"attachment; filename=report_{start_date}_{end_date}.csv"
-        )
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = "Отчет"
 
-        response.write("Раздел,Дата,Количество,Сумма\\n")
+        headers = ["Раздел", "Дата", "Количество", "Сумма"]
+        ws.append(headers)
+
+        for col_num in range(1, len(headers) + 1):
+            cell = ws.cell(row=1, column=col_num)
+            cell.font = openpyxl.styles.Font(bold=True)
+            cell.alignment = openpyxl.styles.Alignment(horizontal="center")
+
         for row in (
             payments_qs.values("created__date")
             .annotate(
@@ -169,9 +174,8 @@ class AdminReportDownloadView(
             )
             .order_by("created__date")
         ):
-            response.write(
-                f"Платежи,{row['created__date']},{row['count']},"
-                f"{row['total']}\\n",
+            ws.append(
+                ["Платежи", row["created__date"], row["count"], row["total"]],
             )
 
         for row in (
@@ -179,8 +183,24 @@ class AdminReportDownloadView(
             .annotate(count=django.db.models.Count("id"))
             .order_by("date")
         ):
-            response.write(
-                f"Посещаемость,{row['date']},{row['count']},\\n",
-            )
+            ws.append(["Посещаемость", row["date"], row["count"], ""])
 
+        for column_cells in ws.columns:
+            length = max(
+                len(str(cell.value)) if cell.value else 0
+                for cell in column_cells
+            )
+            ws.column_dimensions[
+                openpyxl.utils.get_column_letter(column_cells[0].column)
+            ].width = (length + 2)
+
+        response = django.http.HttpResponse(
+            content_type="application/vnd.openxmlformats-officedocument"
+            ".spreadsheetml.sheet",
+        )
+        response["Content-Disposition"] = (
+            f'attachment; filename="report_{start_date}_{end_date}.xlsx"'
+        )
+
+        wb.save(response)
         return response

@@ -38,16 +38,15 @@ class SignUpView(django.views.generic.FormView):
             user,
         )
 
-        activation_url = self.request.build_absolute_uri(
-            django.urls.reverse(
-                "users:activate",
-                kwargs={"uidb64": uidb64, "token": token},
-            ),
+        activation_path = django.urls.reverse(
+            "users:activate",
+            kwargs={"uidb64": uidb64, "token": token},
         )
+        activation_url = f"{django.conf.settings.BASE_URL}{activation_path}"
         django.core.mail.send_mail(
             "Активация профиля",
             activation_url,
-            django.conf.settings.DJANGO_MAIL,
+            django.conf.settings.DEFAULT_FROM_EMAIL,
             [user.email],
             fail_silently=False,
         )
@@ -81,7 +80,11 @@ class ActivateView(django.views.generic.View):
 
         user.is_active = True
         user.save()
-        return django.shortcuts.redirect("users:profile")
+
+        profile_path = django.urls.reverse("users:profile")
+        return django.shortcuts.redirect(
+            f"{django.conf.settings.BASE_URL}{profile_path}",
+        )
 
 
 class ReactivateView(django.views.generic.View):
@@ -97,7 +100,11 @@ class ReactivateView(django.views.generic.View):
 
         user.is_active = True
         user.save()
-        return django.shortcuts.redirect("users:profile")
+
+        profile_path = django.urls.reverse("users:profile")
+        return django.shortcuts.redirect(
+            f"{django.conf.settings.BASE_URL}{profile_path}",
+        )
 
 
 class UserDetailView(
@@ -189,5 +196,9 @@ class CustomPasswordResetView(django.contrib.auth.views.PasswordResetView):
                 ),
             )
             return self.form_invalid(form)
+
+        self.extra_email_context = {
+            "base_url": django.conf.settings.BASE_URL,
+        }
 
         return super().form_valid(form)

@@ -42,7 +42,17 @@ if DEBUG:
         default=True,
         cast=bool,
     )
+    BASE_URL = get_env(
+        "BASE_URL",
+        default="http://localhost:8000",
+        cast=str,
+    )
 else:
+    BASE_URL = get_env(
+        "BASE_URL",
+        default="http://localhost:8080",
+        cast=str,
+    )
     DEFAULT_USER_IS_ACTIVE = get_env(
         "DJANGO_DEFAULT_USER_IS_ACTIVE",
         default=False,
@@ -85,6 +95,21 @@ INSTALLED_APPS = [
     "notifications.apps.NotificationsConfig",
     "django_cleanup.apps.CleanupConfig",
 ]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "DEBUG",
+    },
+}
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

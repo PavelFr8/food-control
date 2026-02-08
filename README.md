@@ -126,10 +126,13 @@ python3 manage.py migrate
 
 По желанию вы можете добавить в БД тестовые данные от разработчика:
 
-!НА ДАННЫЙ МОМЕНТ FIXTURE ОТСУТСВУЕТ!
-
 ```bash
-python3 manage.py loaddata fixtures/data.json
+python3 manage.py loaddata fixtures/roles.json
+python3 manage.py loaddata fixtures/menu.json
+python3 manage.py loaddata fixtures/users.json
+python3 manage.py loaddata fixtures/preffs.json
+python3 manage.py loaddata fixtures/payments.json
+python3 manage.py loaddata fixtures/meals.json
 ```
 
 ### Тестирование
